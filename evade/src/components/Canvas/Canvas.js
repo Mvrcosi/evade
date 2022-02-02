@@ -31,16 +31,42 @@ const Canvas = () => {
                 ctx.fill()
             }
 
+            update() {
+                this.draw()
+                this.x += this.dx;
+                this.y += this.dy;
+            }
+
 
         }
       
 
         const playerArr = []
+        const enemies = []
         window.addEventListener('mousemove', function(e) {
-            const player = new Ball(e.offsetX, e.offsetY, 25, 25, null, null)
+            const player = new Ball(e.offsetX, e.offsetY, 25, 25, 1, 1)
             playerArr.push(player)
         })
 
+
+        function spawnEnemies() {
+            setInterval(() => {
+                
+                const x = 100;
+                const y = 100;
+                const radius = 30;
+                const velocity = {
+                    x: 1,
+                    y: 1
+                }
+
+    enemies.push(new Ball(x,y,radius,0,0,velocity.x,velocity.y))
+                
+
+                
+
+            }, 1000);
+        }
 
         function animate() {
             requestAnimationFrame(animate)
@@ -49,9 +75,16 @@ const Canvas = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
                 player.draw()
             });
+
+
+            enemies.forEach(enemy => {
+                enemy.update()
+
+            })
         }
 
         animate()
+        spawnEnemies()
         
 
 
