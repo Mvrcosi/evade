@@ -27,7 +27,7 @@ const Canvas = () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, this.startX, this.endX)
-                ctx.fillStyle = 'black'
+                ctx.fillStyle = 'blue'
                 ctx.fill()
             }
 
